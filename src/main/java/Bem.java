@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Date;
 
 public class Bem extends Saveable{
     private String nome, descricao;
@@ -13,17 +14,23 @@ public class Bem extends Saveable{
     public Bem(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
+
+        this.generateCodigo();
     }
     public Bem(String nome, String descricao, Localizacao localizacao) {
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
+
+        this.generateCodigo();
     }
     public Bem(String nome, String descricao, Localizacao localizacao, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
         this.categoria = categoria;
+
+        this.generateCodigo();
     }
 
     public String getCodigo() {
@@ -82,6 +89,11 @@ public class Bem extends Saveable{
         return extension;
     }
 
+    private void generateCodigo(){
+        Date d = new Date();
+        System.out.println(d.getTime());
+        this.codigo = String.valueOf(d.getTime());
+    }
     public static Bem get(String codigo){
         try{
 
