@@ -1,12 +1,12 @@
 import java.io.*;
 
 public class Bem extends Saveable{
-    private String codigo, nome, descricao;
+    private String nome, descricao;
     private Localizacao localizacao;
     private Categoria categoria;
 
 
-    protected static final String extension = ".obj";
+    protected static final String extension = ".bem";
     protected static final String directory = "bens/";
 
 
@@ -66,18 +66,6 @@ public class Bem extends Saveable{
         this.categoria = categoria;
     }
 
-    public void save() throws IOException {
-        try{
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("storage/" + this.directory + this.codigo + extension));
-            os.writeObject(this);
-            os.close();
-            System.out.println("Bem salvo com sucesso.");
-        }catch (IOException e){
-            e.printStackTrace();
-            System.out.println("Bem não pôde ser salvo.");
-        }
-    }
-
     public void delete() {
 
     }
@@ -86,9 +74,19 @@ public class Bem extends Saveable{
 
     }
 
+    String getClassDirectory() {
+        return directory;
+    }
+
+    String getClassExtension() {
+        return extension;
+    }
+
     public static Bem get(String codigo){
         try{
+
             ObjectInputStream is = new ObjectInputStream(new FileInputStream("storage/" + directory + codigo + extension));
+            System.out.println("storage/" + directory + codigo + extension);
             Bem bem = (Bem) is.readObject();
             is.close();
             return bem;

@@ -4,12 +4,10 @@ abstract class Saveable implements Serializable{
 
     protected String codigo;
 
-    protected static final String extension = ".obj";
-    protected static final String directory = "objects/";
-
     protected void save() throws IOException{
         try{
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("storage/" + this.directory + this.codigo + extension));
+            System.out.println("storage/" + getClassDirectory() + this.codigo + getClassExtension());
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("storage/" + getClassDirectory() + this.codigo + getClassExtension()));
             os.writeObject(this);
             os.close();
             System.out.println("Bem salvo com sucesso.");
@@ -25,6 +23,8 @@ abstract class Saveable implements Serializable{
 
     }
 
+    abstract String getClassDirectory();
+    abstract String getClassExtension();
 
 
 }
