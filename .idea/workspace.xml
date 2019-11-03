@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c209cb41-e959-499a-a1a1-da3ab58f54c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_27_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Bem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Categoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Localizacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/BemRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/CategoriaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Conexao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/LocalizacaoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,21 +32,30 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1STpmWgvGq11poWKhDr5WuxUnvl" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/objects" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/sqlite-jdbc-3.27.2.1.jar!/" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\objects" />
-      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\localizacoes" />
-      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\categorias" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage" />
       <recent name="C:\Users\lante\IdeaProjects\telgrampatribot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/model" />
+      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\objects" />
+      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\localizacoes" />
+      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\categorias" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -57,7 +75,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Conexao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="repository.Conexao" />
+      <module name="telgrampatribot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="telgrampatribot" />
@@ -68,6 +99,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Conexao" />
       </list>
     </recent_temporary>
   </component>
@@ -81,8 +113,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571597598490</updated>
+      <workItem from="1572804865415" duration="1797000" />
+      <workItem from="1572807303998" duration="5710000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
