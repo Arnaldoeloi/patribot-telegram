@@ -5,7 +5,10 @@ public class Bem extends Saveable{
     private Localizacao localizacao;
     private Categoria categoria;
 
-    private static final String extension = ".bem";
+
+    protected static final String extension = ".obj";
+    protected static final String directory = "bens/";
+
 
     public Bem(String nome, String descricao) {
         this.nome = nome;
@@ -63,9 +66,9 @@ public class Bem extends Saveable{
         this.categoria = categoria;
     }
 
-    void save() throws IOException {
+    public void save() throws IOException {
         try{
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(this.codigo+extension));
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("storage/" + this.directory + this.codigo + extension));
             os.writeObject(this);
             os.close();
             System.out.println("Bem salvo com sucesso.");
@@ -75,17 +78,17 @@ public class Bem extends Saveable{
         }
     }
 
-    void delete() {
+    public void delete() {
 
     }
 
-    void update() {
+    public void update() {
 
     }
 
     public static Bem get(String codigo){
         try{
-            ObjectInputStream is = new ObjectInputStream(new FileInputStream("storage/"+codigo+extension));
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream("storage/" + directory + codigo + extension));
             Bem bem = (Bem) is.readObject();
             is.close();
             return bem;
