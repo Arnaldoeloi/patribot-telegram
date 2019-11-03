@@ -27,8 +27,11 @@ public class LocalizacaoRepository {
         Statement stm = conexaoSQL.criarStatement();
         try{
             stm.execute(sql);
+            stm.close();
         }catch (SQLException e){
             System.out.println(e.getMessage());
+        }finally {
+            conexaoSQL.desconect();
         }
     }
     public void inserir(Localizacao local ){
@@ -39,8 +42,11 @@ public class LocalizacaoRepository {
             stm.setString(1,local.getNome());
             stm.setString(2,local.getDescricao());
             stm.executeUpdate();
+            stm.close();
         }catch (SQLException e){
             System.out.println(e.getMessage());
+        }finally {
+            conexaoSQL.desconect();
         }
 
     }
@@ -59,9 +65,12 @@ public class LocalizacaoRepository {
                         rs.getString("nome") + "\t" +
                         rs.getString("descricao"));
             }
+            stmt.close();
             return locais;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            conexaoSQL.desconect();
         }
         return null;
     }
@@ -80,10 +89,13 @@ public class LocalizacaoRepository {
                         rs.getString("nome") + "\t" +
                         rs.getString("descricao"));
             }
+            pstmt.close();
             return local;
         }catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+        }finally {
+            conexaoSQL.desconect();
         }
     }
 }

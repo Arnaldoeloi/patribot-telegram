@@ -6,7 +6,8 @@ import java.io.ObjectInputStream;
 import java.util.Date;
 
 public class Bem  {
-    private String nome,codigo, descricao;
+    private Integer id ;
+    private String nome, descricao;
     private Localizacao localizacao;
     private Categoria categoria;
 
@@ -14,28 +15,36 @@ public class Bem  {
     public Bem(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-        this.generateCodigo();
+//        this.generateCodigo();
     }
     public Bem(String nome, String descricao, Localizacao localizacao) {
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
-        this.generateCodigo();
+//        this.generateCodigo();
     }
     public Bem(String nome, String descricao, Localizacao localizacao, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
         this.categoria = categoria;
-        this.generateCodigo();
+//        this.generateCodigo();
     }
 
-    public String getCodigo() {
-        return codigo;
+    public Bem(Integer id, String nome, String descricao, Localizacao localizacao, Categoria categoria) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.localizacao = localizacao;
+        this.categoria = categoria;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -75,7 +84,7 @@ public class Bem  {
     private void generateCodigo(){
         Date d = new Date();
         System.out.println(d.getTime());
-        this.codigo = String.valueOf(d.getTime());
+//        this.codigo = String.valueOf(d.getTime());
     }
 
 }
