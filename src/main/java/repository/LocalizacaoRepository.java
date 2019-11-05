@@ -98,4 +98,27 @@ public class LocalizacaoRepository {
             conexaoSQL.desconect();
         }
     }
+    public Localizacao findByName(String nome){
+        String sql = "SELECT * "
+                + "FROM localizacao WHERE nome = ?";
+        try {
+            conexaoSQL.connect();
+            PreparedStatement pstmt  = conexaoSQL.getConn().prepareStatement(sql);
+            pstmt.setString(1,nome);
+            ResultSet rs  = pstmt.executeQuery();
+            Localizacao local = new Localizacao(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"));
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") +  "\t" +
+                        rs.getString("nome") + "\t" +
+                        rs.getString("descricao"));
+            }
+            pstmt.close();
+            return local;
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }finally {
+            conexaoSQL.desconect();
+        }
+    }
 }

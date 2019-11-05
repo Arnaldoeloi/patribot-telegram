@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c209cb41-e959-499a-a1a1-da3ab58f54c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/BemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/banco.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Bem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Bem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Categoria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Localizacao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Saveable.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/BemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/BemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/CategoriaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/CategoriaRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/LocalizacaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/LocalizacaoRepository.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -109,7 +111,8 @@
       <option name="presentableId" value="Default" />
       <updated>1571597598490</updated>
       <workItem from="1572804865415" duration="1797000" />
-      <workItem from="1572807303998" duration="9978000" />
+      <workItem from="1572807303998" duration="10814000" />
+      <workItem from="1572909615910" duration="5106000" />
     </task>
     <task id="LOCAL-00001" summary="conexao sql, findall , findbyid e save funcionando para localizacao">
       <created>1572813295830</created>
@@ -118,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572813295830</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="finalizado crud bem, localizacao e categoria">
+      <created>1572817522983</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1572817522983</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,7 +149,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="conexao sql, findall , findbyid e save funcionando para localizacao" />
-    <option name="LAST_COMMIT_MESSAGE" value="conexao sql, findall , findbyid e save funcionando para localizacao" />
+    <MESSAGE value="finalizado crud bem, localizacao e categoria" />
+    <option name="LAST_COMMIT_MESSAGE" value="finalizado crud bem, localizacao e categoria" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/telgrampatribot$Main.ic" NAME="Main Coverage Results" MODIFIED="1571600325547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
