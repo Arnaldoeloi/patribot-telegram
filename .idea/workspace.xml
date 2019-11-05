@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c209cb41-e959-499a-a1a1-da3ab58f54c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/BemService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/banco.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_27_2_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Categoria.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Localizacao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Saveable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/BemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/BemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/LocalizacaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/LocalizacaoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/telgrampatribot.iml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,31 +23,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1STpmWgvGq11poWKhDr5WuxUnvl" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
   </component>
+  <component name="ProjectId" id="1STpmWgvGq11poWKhDr5WuxUnvl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/sqlite-jdbc-3.27.2.1.jar!/" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/target" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalDependencies" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage" />
-      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/model" />
       <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\objects" />
       <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\localizacoes" />
       <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage\categorias" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot\storage" />
+      <recent name="C:\Users\lante\IdeaProjects\telgrampatribot" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -72,20 +69,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Conexao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="repository.Conexao" />
-      <module name="telgrampatribot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="telgrampatribot" />
@@ -96,7 +80,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Conexao" />
       </list>
     </recent_temporary>
   </component>
@@ -110,29 +93,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571597598490</updated>
-      <workItem from="1572804865415" duration="1797000" />
-      <workItem from="1572807303998" duration="10814000" />
-      <workItem from="1572909615910" duration="5106000" />
     </task>
-    <task id="LOCAL-00001" summary="conexao sql, findall , findbyid e save funcionando para localizacao">
-      <created>1572813295830</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1572813295830</updated>
-    </task>
-    <task id="LOCAL-00002" summary="finalizado crud bem, localizacao e categoria">
-      <created>1572817522983</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1572817522983</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -146,11 +108,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="conexao sql, findall , findbyid e save funcionando para localizacao" />
-    <MESSAGE value="finalizado crud bem, localizacao e categoria" />
-    <option name="LAST_COMMIT_MESSAGE" value="finalizado crud bem, localizacao e categoria" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/telgrampatribot$Main.ic" NAME="Main Coverage Results" MODIFIED="1571600325547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
