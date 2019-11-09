@@ -27,9 +27,6 @@ import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 
 public class PatriBot extends AbilityBot{
-//    public static String BOT_TOKEN = "691988850:AAGwFAI402F7KFhKnrWYoo8tLd1oI0VAgKA";
-//    public static String BOT_USERNAME =  "PatrimonioIMDBot";
-
     private final ResponseHandler responseHandler;
     public PatriBot(){
         super(Constants.BOT_TOKEN, Constants.BOT_USERNAME);
@@ -53,7 +50,6 @@ public class PatriBot extends AbilityBot{
 
     public int creatorId() {
         return Constants.CREATOR_ID;
-//        return 732622998; //master ID - Arnaldo Souza
     }
 
     public Reply replyToButtons(){
@@ -63,8 +59,6 @@ public class PatriBot extends AbilityBot{
 
     public Reply receiveInput(){
         Consumer<Update> action = upd -> responseHandler.receiveInput(getChatId(upd), upd.getMessage().getText());
-//        Consumer<Update> action = upd -> System.out.println(upd.getMessage().getText());
-//        return Reply.of(action, update -> update.getMessage().hasText() && !update.getMessage().getText().contains("/"));
         return Reply.of(action, MESSAGE,update -> update.getMessage().hasText() && !update.getMessage().getText().contains("/"));
     }
 

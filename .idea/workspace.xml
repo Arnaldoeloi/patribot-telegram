@@ -5,8 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatrimonioIMDBot" beforeDir="false" afterPath="$PROJECT_DIR$/PatrimonioIMDBot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatrimonioIMDBot.wal.0" beforeDir="false" afterPath="$PROJECT_DIR$/PatrimonioIMDBot.wal.0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ChatStateMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ChatStateMachine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ResponseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ResponseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PatriBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PatriBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/banco.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage/banco.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
