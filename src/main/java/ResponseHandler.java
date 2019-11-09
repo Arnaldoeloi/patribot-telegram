@@ -23,6 +23,7 @@ public class ResponseHandler {
     private ArrayList<String> commandsHistory;
     private Localizacao localizacaoTemp;
     private Categoria categoriaTemp;
+    private Bem bemTemp;
 
     public ResponseHandler(MessageSender sender, DBContext db){
         this.sender = sender;
@@ -48,7 +49,6 @@ public class ResponseHandler {
             e.printStackTrace();
         }
     }
-
     public void replyToButtons(long chatId, String buttonId){
         if(buttonId.contains("findLocalizacao") || buttonId.contains("findCategoria")){
             System.out.println("DISPLAY_DOS_BOTOES");
@@ -59,6 +59,21 @@ public class ResponseHandler {
                 localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
                 salvarObjBem(chatId);
             }else{
+                if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_PARA_MOVER_BEM)){
+                    Conexao con = new Conexao();
+                    BemService bemService = new BemService(con);
+                    bemService.changeLocation(bemTemp.getId(), Integer.parseInt(buttonId.replaceAll("[\\D]", "")) );
+                    try {
+                        sender.execute(new SendMessage()
+                                .setText("O bem foi movido com sucesso para <b>"+bemTemp.getLocalizacao().getNome()+"</b>.")
+                                .enableHtml(true)
+                                .setChatId(chatId)
+                        );
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+                    replyWithBackButton(chatId);
+                }
                 if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_BUSCA_BEM)){
                     Conexao con = new Conexao();
                     LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(con);
@@ -163,9 +178,47 @@ public class ResponseHandler {
                     chatStates.put(chatId, ChatStateMachine.ESPERANDO_DESCRICAO_BUSCA_BEM);
                     replyEsperandoDescricaoParaBuscar(chatId);
                     break;
+                case Constants.MOVIMENTAR_BEM:
+                    chatStates.put(chatId, ChatStateMachine.ESPERANDO_CODIGO_PARA_MOVER_BEM);
+                    replyEsperandoCodigoParaBuscar(chatId);
+                    break;
+                case Constants.GERAR_RELATORIO:
+                    chatStates.put(chatId, ChatStateMachine.GERANDO_RELATORIO);
+                    replyGerarRelatorio(chatId);
+                    break;
             }
         }
-
+    }
+    private void replyGerarRelatorio(long chatId){
+        try {
+            sender.execute(new SendMessage()
+                    .setText("<i>Gerando relatório...</i>")
+                    .enableHtml(true)
+                    .setChatId(chatId)
+            );
+            Conexao con = new Conexao();
+            BemService bemService = new BemService(con);
+            for(Bem bem : bemService.getRelatorio()){
+                sender.execute(new SendMessage()
+                        .setText(bem.toString())
+                        .enableHtml(true)
+                        .setChatId(chatId)
+                );
+            }
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+        replyWithBackButton(chatId);
+    }
+    public void replyEsperandoCodigoParaBuscar(long chatId){
+        try {
+            sender.execute(new SendMessage()
+                    .setText("Qual o código do bem que você deseja fazer a movimentação?")
+                    .setChatId(chatId)
+            );
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
     public void replyEsperandoDescricaoParaBuscar(long chatId){
         try {
@@ -243,7 +296,7 @@ public class ResponseHandler {
             System.out.println("replyCadastrarBem");
             try {
                 sender.execute(new SendMessage()
-                        .setText("\n <b>Cadastrando bem</b>\n ")
+                        .setText("\n <i>Cadastrando bem</i>\n ")
                         .setChatId(chatId)
                         .enableHtml(true)
                 );
@@ -278,7 +331,7 @@ public class ResponseHandler {
         if(chatStates.get(chatId).equals(ChatStateMachine.ESPERANDO_NOME_LOCALIZACAO)) {
             try {
                 sender.execute(new SendMessage()
-                        .setText("\n <b>Cadastrando localização...</b>\n ")
+                        .setText("\n <i>Cadastrando localização...</i>\n ")
                         .setChatId(chatId)
                         .enableHtml(true)
                 );
@@ -299,7 +352,7 @@ public class ResponseHandler {
             System.out.println("replyCadastrarCategorias");
             try {
                 sender.execute(new SendMessage()
-                        .setText("\n <b>Cadastrando categoria...</b>\n ")
+                        .setText("\n <i>Cadastrando categoria...</i>\n ")
                         .setChatId(chatId)
                         .enableHtml(true)
                 );
@@ -395,6 +448,7 @@ public class ResponseHandler {
         bemRepository.inserir(bem);
         replyWithBackButton(chatId);
     }
+
     public void receiveInput(long chatId, String name){
         switch (chatStates.get(chatId)) {
             case ESPERANDO_NOME_CATEGORIA:
@@ -432,36 +486,15 @@ public class ResponseHandler {
                 salvarObjLocalizacao(chatId);
                 break;
             case ESPERANDO_CODIGO_BUSCA_BEM:
-                try {
-
-                    Conexao con = new Conexao();
-                    BemRepository bemRepository = new BemRepository(con);
-                    Bem bemTemp = bemRepository.findById(Integer.parseInt(name.replaceAll("[\\D]", "")));
-                    if (bemTemp != null) {
-                        sender.execute(new SendMessage()
-                                .setText(bemTemp.toString())
-                                .enableHtml(true)
-                                .setChatId(chatId)
-                        );
-                    } else {
-                        sender.execute(new SendMessage()
-                                .setText("<b>Não há nenhum bem com esse código.</b>")
-                                .enableHtml(true)
-                                .setChatId(chatId)
-                        );
-                    }
-                    replyWithBackButton(chatId);
-
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
+                findAndSetBemTemp(chatId, name);
+                replyWithBackButton(chatId);
                 break;
             case ESPERANDO_NOME_BEM:
                 this.commandsHistory.add(name);
                 chatStates.put(chatId, ChatStateMachine.ESPERANDO_DESCRICAO_BEM);
                 try {
                     sender.execute(new SendMessage()
-                            .setText("Qual a descricao do bem?")
+                            .setText("Qual a descrição do bem?")
                             .setChatId(chatId)
                     );
                 } catch (TelegramApiException e) {
@@ -532,8 +565,45 @@ public class ResponseHandler {
                 }
                 replyWithBackButton(chatId);
                 break;
+            case ESPERANDO_CODIGO_PARA_MOVER_BEM:
+                findAndSetBemTemp(chatId, name);
+                try {
+                    sender.execute(new SendMessage()
+                            .setText("Para onde deseja movimentar o bem <b>"+ bemTemp.getNome() +"</b>?")
+                            .setReplyMarkup(KeyboardFactory.ReplyKeyboardWithLocalizacoes())
+                            .enableHtml(true)
+                            .setChatId(chatId)
+                    );
+                    chatStates.put(chatId, ChatStateMachine.ESPERANDO_LOCALIZACAO_PARA_MOVER_BEM);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                break;
 
         }
         System.out.println(chatStates.get(chatId).toString());
+    }
+    public void findAndSetBemTemp(long chatId, String unformattedId){
+        try {
+            Conexao con = new Conexao();
+            BemRepository bemRepository = new BemRepository(con);
+            bemTemp = bemRepository.findById(Integer.parseInt(unformattedId.replaceAll("[\\D]", "")));
+            if (bemTemp != null) {
+                sender.execute(new SendMessage()
+                        .setText(bemTemp.toString())
+                        .enableHtml(true)
+                        .setChatId(chatId)
+                );
+            } else {
+                sender.execute(new SendMessage()
+                        .setText("<b>Não há nenhum bem com esse código.</b>")
+                        .enableHtml(true)
+                        .setChatId(chatId)
+                );
+            }
+
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }
