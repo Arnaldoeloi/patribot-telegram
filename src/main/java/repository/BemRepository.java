@@ -139,7 +139,7 @@ public class BemRepository {
     }
     public Bem findByName(String nome){
         String sql = "SELECT * "
-                + "FROM bem WHERE nome = ?";
+                + "FROM bem WHERE nome LIKE ?";
         try {
             conexaoSQL.connect();
             PreparedStatement pstmt  = conexaoSQL.getConn().prepareStatement(sql);
@@ -162,24 +162,27 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
-    public Bem findByDescription(String descricao){
+    public List<Bem> findByDescription(String descricao){
         String sql = "SELECT * "
-                + "FROM bem WHERE descricao = ?";
+                + "FROM bem WHERE descricao LIKE ?";
         try {
             conexaoSQL.connect();
             PreparedStatement pstmt  = conexaoSQL.getConn().prepareStatement(sql);
-            pstmt.setString(1,descricao);
+            pstmt.setString(1,"%"+descricao+"%");
             ResultSet rs  = pstmt.executeQuery();
-            Localizacao local = localizacaoRepository.findById(rs.getInt("localizacao"));
-            Categoria categoria = categoriaRepository.findById(rs.getInt("categoria"));
-            Bem bem = new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria);
+            Localizacao local = null;
+            Categoria categoria = null ;
+            List<Bem> bens = new ArrayList<Bem>();
             while (rs.next()) {
+                local = localizacaoRepository.findById(rs.getInt("localizacao"));
+                categoria = categoriaRepository.findById(rs.getInt("categoria"));
+                bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
                 System.out.println(rs.getInt("id") +  "\t" +
                         rs.getString("nome") + "\t" +
                         rs.getString("descricao"));
             }
             pstmt.close();
-            return bem;
+            return bens;
         }catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
