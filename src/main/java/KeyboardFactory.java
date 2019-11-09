@@ -1,6 +1,11 @@
 import Constants.Constants;
+import model.Categoria;
+import model.Localizacao;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import repository.CategoriaRepository;
+import repository.Conexao;
+import repository.LocalizacaoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,4 +64,37 @@ public class KeyboardFactory {
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
+
+    public static InlineKeyboardMarkup ReplyKeyboardWithCategorias(){
+        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+
+        Conexao con = new Conexao();
+        CategoriaRepository categoriaRepository = new CategoriaRepository(con);
+
+        for(Categoria categoria : categoriaRepository.findall()){
+            List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+            rowInLine.add(new InlineKeyboardButton().setText(categoria.getNome()).setCallbackData("categoria"+categoria.getId()));
+            rowsInline.add(rowInLine);
+        }
+        inlineKeyboard.setKeyboard(rowsInline);
+        return inlineKeyboard;
+    }
+
+    public static InlineKeyboardMarkup ReplyKeyboardWithLocalizacoes(){
+        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+
+        Conexao con = new Conexao();
+        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(con);
+
+        for(Localizacao localizacao : localizacaoRepository.findall()){
+            List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+            rowInLine.add(new InlineKeyboardButton().setText(localizacao.getNome()).setCallbackData("localizacao"+localizacao.getId()));
+            rowsInline.add(rowInLine);
+        }
+        inlineKeyboard.setKeyboard(rowsInline);
+        return inlineKeyboard;
+    }
 }
+

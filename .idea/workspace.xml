@@ -5,11 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatrimonioIMDBot" beforeDir="false" afterPath="$PROJECT_DIR$/PatrimonioIMDBot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatrimonioIMDBot.wal.0" beforeDir="false" afterPath="$PROJECT_DIR$/PatrimonioIMDBot.wal.0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ChatStateMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ChatStateMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KeyboardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KeyboardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PatriBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PatriBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ResponseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ResponseHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Bem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Bem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Categoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Localizacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Localizacao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/banco.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage/banco.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -127,6 +127,11 @@
           <url>jar://$MAVEN_REPOSITORY$/org/telegram/telegrambots/4.4.0.1/telegrambots-4.4.0.1.jar!/org/telegram/telegrambots/bots/TelegramLongPollingBot.class</url>
           <line>18</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/model/Bem.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

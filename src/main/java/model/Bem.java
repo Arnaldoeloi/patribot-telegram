@@ -82,11 +82,11 @@ public class Bem  {
     @Override
     public String toString() {
         return "\n" +
-                "CODIGO = " + id + '\n' +
-                "NOME = " + nome + '\n' +
-                "DESCRIÇÃO = " + descricao + '\n' +
-                "LOCALIZACAO = " + localizacao + '\n' +
-                "CATEGORIA = " + localizacao + '\n' +
+                "<b>CODIGO:</b> " + id + '\n' +
+                "<b>NOME:</b> " + nome + '\n' +
+                "<b>DESCRIÇÃO: </b>" + descricao + '\n' +
+                "<b>LOCALIZACAO:</b>" + localizacao.getNome() + '\n' +
+                "<b>CATEGORIA:</b>" + categoria.getNome() + '\n' +
                 '\n';
     }
 }

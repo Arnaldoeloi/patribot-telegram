@@ -19,6 +19,7 @@ public class Main {
 //        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
 //        localizacaoRepository.criarTabela();
 //        CategoriaRepository  categoriaRepository= new CategoriaRepository(conexao);
+//        categoriaRepository.criarTabela();
 //        BemRepository bemRepository = new BemRepository(conexao);
 //        bemRepository.criarTabela();
 //        categoriaRepository.inserir(new Categoria("eletro","vai pegar fogo"));
