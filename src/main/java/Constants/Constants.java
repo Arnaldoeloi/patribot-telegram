@@ -15,6 +15,8 @@ public interface Constants {
     String CADASTRAR_BEM = "Cadastrar Bem";
     String LISTAR_LOCALIZACOES = "Listar Localizações";
     String LISTAR_CATEGORIAS = "Listar Categorias de Bem";
+    String LISTAR_BENS_POR_CATEGORIA = "Bens por categoria";
+    String LISTAR_BENS_POR_LOCALIZACAO = "Bens por localização";
     String LISTAR_BENS = "Listar Bens";
     String BUSCAR_BEM_CODIGO = "Buscar bem por codigo";
     String BUSCAR_BEM_NOME = "Buscar bem por nome";

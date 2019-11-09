@@ -21,6 +21,8 @@ public class KeyboardFactory {
         List<InlineKeyboardButton> rowInline5 = new ArrayList<>();
         List<InlineKeyboardButton> rowInline6 = new ArrayList<>();
         List<InlineKeyboardButton> rowInline7 = new ArrayList<>();
+        List<InlineKeyboardButton> rowInline8 = new ArrayList<>();
+        List<InlineKeyboardButton> rowInline9 = new ArrayList<>();
 
 
         rowInline1.add(new InlineKeyboardButton().setText(Constants.CADASTRAR_BEM).setCallbackData(Constants.CADASTRAR_BEM));
@@ -33,12 +35,16 @@ public class KeyboardFactory {
 
         rowInline4.add(new InlineKeyboardButton().setText(Constants.LISTAR_CATEGORIAS).setCallbackData(Constants.LISTAR_CATEGORIAS));
 
-        rowInline5.add(new InlineKeyboardButton().setText(Constants.BUSCAR_BEM_CODIGO).setCallbackData(Constants.BUSCAR_BEM_CODIGO));
-        rowInline5.add(new InlineKeyboardButton().setText(Constants.BUSCAR_BEM_NOME).setCallbackData(Constants.BUSCAR_BEM_NOME));
+        rowInline5.add(new InlineKeyboardButton().setText(Constants.LISTAR_BENS_POR_LOCALIZACAO).setCallbackData(Constants.LISTAR_BENS_POR_LOCALIZACAO));
 
-        rowInline6.add(new InlineKeyboardButton().setText(Constants.BUSCAR_BEM_DESCRICAO).setCallbackData(Constants.BUSCAR_BEM_DESCRICAO));
-        rowInline7.add(new InlineKeyboardButton().setText(Constants.MOVIMENTAR_BEM).setCallbackData(Constants.MOVIMENTAR_BEM));
-        rowInline7.add(new InlineKeyboardButton().setText(Constants.GERAR_RELATORIO).setCallbackData(Constants.GERAR_RELATORIO));
+        rowInline6.add(new InlineKeyboardButton().setText(Constants.LISTAR_CATEGORIAS).setCallbackData(Constants.LISTAR_CATEGORIAS));
+
+        rowInline7.add(new InlineKeyboardButton().setText(Constants.BUSCAR_BEM_CODIGO).setCallbackData(Constants.BUSCAR_BEM_CODIGO));
+        rowInline7.add(new InlineKeyboardButton().setText(Constants.BUSCAR_BEM_NOME).setCallbackData(Constants.BUSCAR_BEM_NOME));
+
+        rowInline8.add(new InlineKeyboardButton().setText(Constants.BUSCAR_BEM_DESCRICAO).setCallbackData(Constants.BUSCAR_BEM_DESCRICAO));
+        rowInline9.add(new InlineKeyboardButton().setText(Constants.MOVIMENTAR_BEM).setCallbackData(Constants.MOVIMENTAR_BEM));
+        rowInline9.add(new InlineKeyboardButton().setText(Constants.GERAR_RELATORIO).setCallbackData(Constants.GERAR_RELATORIO));
 
 
 //        rowInline.add(new InlineKeyboardButton().setText(Constants.TRAINING_TODAY).setCallbackData(Constants.TRAINING_TODAY));
@@ -74,7 +80,7 @@ public class KeyboardFactory {
 
         for(Categoria categoria : categoriaRepository.findall()){
             List<InlineKeyboardButton> rowInLine = new ArrayList<>();
-            rowInLine.add(new InlineKeyboardButton().setText(categoria.getNome()).setCallbackData("categoria"+categoria.getId()));
+            rowInLine.add(new InlineKeyboardButton().setText(categoria.getNome()).setCallbackData("findCategoria"+categoria.getId()));
             rowsInline.add(rowInLine);
         }
         inlineKeyboard.setKeyboard(rowsInline);
@@ -90,7 +96,7 @@ public class KeyboardFactory {
 
         for(Localizacao localizacao : localizacaoRepository.findall()){
             List<InlineKeyboardButton> rowInLine = new ArrayList<>();
-            rowInLine.add(new InlineKeyboardButton().setText(localizacao.getNome()).setCallbackData("localizacao"+localizacao.getId()));
+            rowInLine.add(new InlineKeyboardButton().setText(localizacao.getNome()).setCallbackData("findLocalizacao"+localizacao.getId()));
             rowsInline.add(rowInLine);
         }
         inlineKeyboard.setKeyboard(rowsInline);

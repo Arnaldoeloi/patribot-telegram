@@ -111,7 +111,7 @@ public class BemRepository {
         return null;
     }
 
-    public List<Bem> findByLocal ( String localizacao){
+    public List<Bem> findByLocal (String localizacao){
         String sql = "SELECT * FROM bem WHERE localizacao = ?";
         Localizacao local = localizacaoRepository.findByName(localizacao);
         Categoria categoria ;
