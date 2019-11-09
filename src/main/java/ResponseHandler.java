@@ -155,9 +155,37 @@ public class ResponseHandler {
                     chatStates.put(chatId, ChatStateMachine.ESPERANDO_LOCALIZACAO_BUSCA_BEM);
                     replyEsperandoLocalizacaoParaBuscar(chatId);
                     break;
+                case Constants.BUSCAR_BEM_NOME:
+                    chatStates.put(chatId, ChatStateMachine.ESPERANDO_NOME_BUSCA_BEM);
+                    replyEsperandoNomeParaBuscar(chatId);
+                    break;
+                case Constants.BUSCAR_BEM_DESCRICAO:
+                    chatStates.put(chatId, ChatStateMachine.ESPERANDO_DESCRICAO_BUSCA_BEM);
+                    replyEsperandoDescricaoParaBuscar(chatId);
+                    break;
             }
         }
 
+    }
+    public void replyEsperandoDescricaoParaBuscar(long chatId){
+        try {
+            sender.execute(new SendMessage()
+                    .setText("Qual a descrição do bem que você deseja encontrar?")
+                    .setChatId(chatId)
+            );
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+    public void replyEsperandoNomeParaBuscar(long chatId){
+        try {
+            sender.execute(new SendMessage()
+                    .setText("Qual o nome do bem?")
+                    .setChatId(chatId)
+            );
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
     public void replyEsperandoLocalizacaoParaBuscar(long chatId){
         try {
@@ -343,8 +371,32 @@ public class ResponseHandler {
             }
         }
     }
+    private void salvarObjCategoria(long chatId){
+        Conexao conexao = new Conexao();
+        CategoriaRepository categoriaRepository = new CategoriaRepository(conexao);
+        Categoria categoria = new Categoria(commandsHistory.get(0), commandsHistory.get(1));
+        commandsHistory.clear();
+        categoriaRepository.inserir(categoria);
+        replyWithBackButton(chatId);
+    }
+    private void salvarObjLocalizacao(long chatId){
+        Conexao conexao = new Conexao();
+        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
+        Localizacao localizacao = new Localizacao(commandsHistory.get(0), commandsHistory.get(1));
+        commandsHistory.clear();
+        localizacaoRepository.inserir(localizacao);
+        replyWithBackButton(chatId);
+    }
+    private void salvarObjBem(long chatId){
+        Conexao conexao = new Conexao();
+        BemRepository bemRepository = new BemRepository(conexao);
+        Bem bem = new Bem(commandsHistory.get(0), commandsHistory.get(1), localizacaoTemp, categoriaTemp);
+        commandsHistory.clear();
+        bemRepository.inserir(bem);
+        replyWithBackButton(chatId);
+    }
     public void receiveInput(long chatId, String name){
-        switch (chatStates.get(chatId)){
+        switch (chatStates.get(chatId)) {
             case ESPERANDO_NOME_CATEGORIA:
                 this.commandsHistory.add(name);
                 try {
@@ -358,7 +410,7 @@ public class ResponseHandler {
                 chatStates.put(chatId, ChatStateMachine.ESPERANDO_DESCRICAO_CATEGORIA);
                 break;
             case ESPERANDO_DESCRICAO_CATEGORIA:
-                System.out.println("DESC da categoria: "+name);
+                System.out.println("DESC da categoria: " + name);
                 this.commandsHistory.add(name);
                 salvarObjCategoria(chatId);
                 break;
@@ -380,18 +432,18 @@ public class ResponseHandler {
                 salvarObjLocalizacao(chatId);
                 break;
             case ESPERANDO_CODIGO_BUSCA_BEM:
-                try{
+                try {
 
                     Conexao con = new Conexao();
                     BemRepository bemRepository = new BemRepository(con);
                     Bem bemTemp = bemRepository.findById(Integer.parseInt(name.replaceAll("[\\D]", "")));
-                    if(bemTemp != null){
+                    if (bemTemp != null) {
                         sender.execute(new SendMessage()
                                 .setText(bemTemp.toString())
                                 .enableHtml(true)
                                 .setChatId(chatId)
                         );
-                    }else{
+                    } else {
                         sender.execute(new SendMessage()
                                 .setText("<b>Não há nenhum bem com esse código.</b>")
                                 .enableHtml(true)
@@ -400,7 +452,7 @@ public class ResponseHandler {
                     }
                     replyWithBackButton(chatId);
 
-                }catch (TelegramApiException e){
+                } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -430,32 +482,58 @@ public class ResponseHandler {
                     e.printStackTrace();
                 }
                 break;
+            case ESPERANDO_NOME_BUSCA_BEM:
+                try {
+                    Conexao con = new Conexao();
+                    BemRepository bemRepository = new BemRepository(con);
+                    List<Bem> bens = bemRepository.findByName(name);
+                    if (!bens.isEmpty()) {
+                        for (Bem bem : bens) {
+                            sender.execute(new SendMessage()
+                                    .setText(bem.toString())
+                                    .enableHtml(true)
+                                    .setChatId(chatId)
+                            );
+                        }
+                    }else{
+                        sender.execute(new SendMessage()
+                                .setText("<b>Não foram encontrados bem com esse nome.</b>")
+                                .enableHtml(true)
+                                .setChatId(chatId)
+                        );
+                    }
+                }catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                replyWithBackButton(chatId);
+                break;
+            case ESPERANDO_DESCRICAO_BUSCA_BEM:
+                try {
+                    Conexao con = new Conexao();
+                    BemRepository bemRepository = new BemRepository(con);
+                    List<Bem> bens = bemRepository.findByDescription(name);
+                    if (!bens.isEmpty()) {
+                        for (Bem bem : bens) {
+                            sender.execute(new SendMessage()
+                                    .setText(bem.toString())
+                                    .enableHtml(true)
+                                    .setChatId(chatId)
+                            );
+                        }
+                    }else{
+                        sender.execute(new SendMessage()
+                                .setText("<b>Não foram encontrados bem com essa descrição.</b>")
+                                .enableHtml(true)
+                                .setChatId(chatId)
+                        );
+                    }
+                }catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                replyWithBackButton(chatId);
+                break;
 
         }
         System.out.println(chatStates.get(chatId).toString());
-    }
-    private void salvarObjCategoria(long chatId){
-        Conexao conexao = new Conexao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(conexao);
-        Categoria categoria = new Categoria(commandsHistory.get(0), commandsHistory.get(1));
-        commandsHistory.clear();
-        categoriaRepository.inserir(categoria);
-        replyWithBackButton(chatId);
-    }
-    private void salvarObjLocalizacao(long chatId){
-        Conexao conexao = new Conexao();
-        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
-        Localizacao localizacao = new Localizacao(commandsHistory.get(0), commandsHistory.get(1));
-        commandsHistory.clear();
-        localizacaoRepository.inserir(localizacao);
-        replyWithBackButton(chatId);
-    }
-    private void salvarObjBem(long chatId){
-        Conexao conexao = new Conexao();
-        BemRepository bemRepository = new BemRepository(conexao);
-        Bem bem = new Bem(commandsHistory.get(0), commandsHistory.get(1), localizacaoTemp, categoriaTemp);
-        commandsHistory.clear();
-        bemRepository.inserir(bem);
-        replyWithBackButton(chatId);
     }
 }
