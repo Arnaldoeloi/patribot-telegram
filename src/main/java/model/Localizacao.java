@@ -40,10 +40,10 @@ public class Localizacao {
 
     @Override
     public String toString() {
-        return "Localizacao{" +
-                "nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", id=" + id +
-                '}';
+        return "\n" +
+                "<b>Codigo da Localizacao</b>: " + id + '\n' +
+                "<b>Nome: </b>" + nome + '\n' +
+                "<b>Descrição: </b>" + descricao + '\n' +
+                '\n';
     }
 }

@@ -20,11 +20,11 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return "\n" +
+                "<b>Codigo da Categoria</b>: " + id + '\n' +
+                "<b>Nome: </b>" + nome + '\n' +
+                "<b>Descrição: </b>" + descricao + '\n' +
+                '\n';
     }
 
     public Integer getId() {

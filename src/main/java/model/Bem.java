@@ -15,20 +15,20 @@ public class Bem  {
     public Bem(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-//        this.generateCodigo();
+
     }
     public Bem(String nome, String descricao, Localizacao localizacao) {
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
-//        this.generateCodigo();
+
     }
     public Bem(String nome, String descricao, Localizacao localizacao, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
         this.categoria = categoria;
-//        this.generateCodigo();
+
     }
 
     public Bem(Integer id, String nome, String descricao, Localizacao localizacao, Categoria categoria) {
@@ -77,14 +77,6 @@ public class Bem  {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
-
-
-
-    private void generateCodigo(){
-        Date d = new Date();
-        System.out.println(d.getTime());
-//        this.codigo = String.valueOf(d.getTime());
     }
 
     @Override

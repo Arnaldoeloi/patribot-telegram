@@ -1,6 +1,7 @@
 import Constants.Constants;
 import model.Bem;
 import model.Categoria;
+import model.Localizacao;
 import org.telegram.abilitybots.api.db.DBContext;
 import org.telegram.abilitybots.api.sender.MessageSender;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -8,6 +9,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import repository.BemRepository;
 import repository.CategoriaRepository;
 import repository.Conexao;
+import repository.LocalizacaoRepository;
 
 
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class ResponseHandler {
                 replyCadastrarBem(chatId);
                 break;
             case Constants.CADASTRAR_LOCALIZACAO:
-                chatStates.put(chatId, ChatStateMachine.CADASTRANDO_LOCALIZACAO);
+                chatStates.put(chatId, ChatStateMachine.ESPERANDO_NOME_LOCALIZACAO);
                 replyCadastrarLocalizacao(chatId);
                 break;
             case Constants.CADASTRAR_CATEGORIA:
@@ -65,8 +67,16 @@ public class ResponseHandler {
                 chatStates.put(chatId, ChatStateMachine.LISTANDO_BENS);
                 replyListarBens(chatId);
                 break;
+            case Constants.LISTAR_LOCALIZACOES:
+                chatStates.put(chatId, ChatStateMachine.LISTANDO_LOCALIZACOES);
+                replyListarLocalizacoes(chatId);
+                break;
             case Constants.LISTAR_CATEGORIAS:
                 chatStates.put(chatId, ChatStateMachine.LISTANDO_CATEGORIAS);
+                replyListarCategorias(chatId);
+                break;
+            case Constants.BUSCAR_BEM_CODIGO:
+                chatStates.put(chatId, ChatStateMachine.ESPERANDO_CODIGO_BUSCA_BEM);
                 replyListarCategorias(chatId);
                 break;
         }
@@ -106,10 +116,23 @@ public class ResponseHandler {
     }
 
     public void replyCadastrarLocalizacao(long chatId){
-        if(chatStates.get(chatId).equals(ChatStateMachine.CADASTRANDO_LOCALIZACAO)) {
-            System.out.println("replyCadastrarLocalizacao");
-            replyWithBackButton(chatId);
+        if(chatStates.get(chatId).equals(ChatStateMachine.ESPERANDO_NOME_LOCALIZACAO)) {
+            try {
+                sender.execute(new SendMessage()
+                        .setText("\n <b>Cadastrando localização...</b>\n ")
+                        .setChatId(chatId)
+                        .enableHtml(true)
+                );
 
+                sender.execute(new SendMessage()
+                        .setText("Qual o nome da localização?")
+                        .setChatId(chatId)
+                );
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("replyCadastrarLocalizacao");
         }
     }
 
@@ -143,6 +166,27 @@ public class ResponseHandler {
                 for (Categoria categoria : categoriaRepository.findall()) {
                     sender.execute(new SendMessage()
                             .setText(categoria.toString())
+                            .enableHtml(true)
+                            .setChatId(chatId));
+                }
+                replyWithBackButton(chatId);
+
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+    }
+
+    public void replyListarLocalizacoes(long chatId) {
+        if (chatStates.get(chatId).equals(ChatStateMachine.LISTANDO_LOCALIZACOES)) {
+            Conexao conexao = new Conexao();
+            LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
+            localizacaoRepository.criarTabela();
+            try {
+                for (Localizacao localizacao : localizacaoRepository.findall()) {
+                    sender.execute(new SendMessage()
+                            .setText(localizacao.toString())
+                            .enableHtml(true)
                             .setChatId(chatId));
                 }
                 replyWithBackButton(chatId);
@@ -175,7 +219,6 @@ public class ResponseHandler {
     public void receiveInput(long chatId, String name){
         switch (chatStates.get(chatId)){
             case ESPERANDO_NOME_CATEGORIA:
-                System.out.println("Nome da categoria: "+name);
                 this.commandsHistory.add(name);
                 try {
                     sender.execute(new SendMessage()
@@ -188,10 +231,37 @@ public class ResponseHandler {
                 chatStates.put(chatId, ChatStateMachine.ESPERANDO_DESCRICAO_CATEGORIA);
                 break;
             case ESPERANDO_DESCRICAO_CATEGORIA:
-
                 System.out.println("DESC da categoria: "+name);
                 this.commandsHistory.add(name);
                 salvarObjCategoria(chatId);
+                break;
+            case ESPERANDO_NOME_LOCALIZACAO:
+                this.commandsHistory.add(name);
+                try {
+                    sender.execute(new SendMessage()
+                            .setText("Qual a descricao da localizacao?")
+                            .setChatId(chatId)
+                    );
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                chatStates.put(chatId, ChatStateMachine.ESPERANDO_DESCRICAO_LOCALIZACAO);
+                break;
+
+            case ESPERANDO_DESCRICAO_LOCALIZACAO:
+                this.commandsHistory.add(name);
+                salvarObjLocalizacao(chatId);
+                break;
+            case ESPERANDO_CODIGO_BUSCA_BEM:
+                try{
+                    sender.execute(new SendMessage()
+                            .setText("<b>Digite o código de busca do bem:</b>")
+                            .enableHtml(true)
+                            .setChatId(chatId)
+                    );
+                }catch (TelegramApiException e){
+                    e.printStackTrace();
+                }
                 break;
 
         }
@@ -203,6 +273,14 @@ public class ResponseHandler {
         Categoria categoria = new Categoria(commandsHistory.get(0), commandsHistory.get(1));
         commandsHistory.clear();
         categoriaRepository.inserir(categoria);
+        replyWithBackButton(chatId);
+    }
+    private void salvarObjLocalizacao(long chatId){
+        Conexao conexao = new Conexao();
+        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
+        Localizacao localizacao = new Localizacao(commandsHistory.get(0), commandsHistory.get(1));
+        commandsHistory.clear();
+        localizacaoRepository.inserir(localizacao);
         replyWithBackButton(chatId);
     }
 }
