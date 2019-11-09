@@ -56,6 +56,8 @@ public class KeyboardFactory {
         rowsInline.add(rowInline5);
         rowsInline.add(rowInline6);
         rowsInline.add(rowInline7);
+        rowsInline.add(rowInline8);
+        rowsInline.add(rowInline9);
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
