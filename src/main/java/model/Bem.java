@@ -87,4 +87,14 @@ public class Bem  {
 //        this.codigo = String.valueOf(d.getTime());
     }
 
+    @Override
+    public String toString() {
+        return "\n" +
+                "CODIGO = " + id + '\n' +
+                "NOME = " + nome + '\n' +
+                "DESCRIÇÃO = " + descricao + '\n' +
+                "LOCALIZACAO = " + localizacao + '\n' +
+                "CATEGORIA = " + localizacao + '\n' +
+                '\n';
+    }
 }

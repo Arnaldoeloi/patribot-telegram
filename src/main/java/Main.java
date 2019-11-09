@@ -15,17 +15,17 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Conexao conexao = new Conexao();
-        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
-        localizacaoRepository.criarTabela();
-        CategoriaRepository  categoriaRepository= new CategoriaRepository(conexao);
-        BemRepository bemRepository = new BemRepository(conexao);
+//        Conexao conexao = new Conexao();
+//        LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
+//        localizacaoRepository.criarTabela();
+//        CategoriaRepository  categoriaRepository= new CategoriaRepository(conexao);
+//        BemRepository bemRepository = new BemRepository(conexao);
 //        bemRepository.criarTabela();
 //        categoriaRepository.inserir(new Categoria("eletro","vai pegar fogo"));
 //        localizacaoRepository.inserir(new Localizacao("quarto3","local para procastinar"));
 //        bemRepository.inserir(new Bem("pc","top de linha",localizacaoRepository.findById(1),categoriaRepository.findById(1)));
-        Bem bem = bemRepository.findById(1);
-        System.out.println(bem.getLocalizacao().getNome() + " "+bem.getCategoria().getNome());
+//        Bem bem = bemRepository.findById(1);
+//        System.out.println(bem.getLocalizacao().getNome() + " "+bem.getCategoria().getNome());
         //bemRepository.findall();
 //        categoriaRepository.findById(1);
 //        categoriaRepository.criarTabela();
@@ -57,13 +57,13 @@ public class Main {
 //        //System.out.println(d.getTime());
 //
 //        /*
-//        ApiContextInitializer.init();
-//        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-//        try {
-//            telegramBotsApi.registerBot(new PatriBot());
-//        } catch (TelegramApiException e) {
-//            e.printStackTrace();
-//        }
+        ApiContextInitializer.init();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        try {
+            telegramBotsApi.registerBot(new PatriBot());
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
 //
 //         */
     }

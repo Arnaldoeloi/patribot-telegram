@@ -37,4 +37,13 @@ public class Localizacao {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Localizacao{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
