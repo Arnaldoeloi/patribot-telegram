@@ -61,9 +61,9 @@ public class LocalizacaoRepository {
             List<Localizacao> locais = new ArrayList<Localizacao>();
             while (rs.next()) {
                 locais.add(new Localizacao(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao")));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+//                System.out.println(rs.getInt("id") +  "\t" +
+//                        rs.getString("nome") + "\t" +
+//                        rs.getString("descricao"));
             }
             stmt.close();
             return locais;
@@ -84,11 +84,11 @@ public class LocalizacaoRepository {
             pstmt.setInt(1,id);
             ResultSet rs  = pstmt.executeQuery();
             Localizacao local = new Localizacao(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"));
-            while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
-            }
+//            while (rs.next()) {
+//                System.out.println(rs.getInt("id") +  "\t" +
+//                        rs.getString("nome") + "\t" +
+//                        rs.getString("descricao"));
+//            }
             pstmt.close();
             return local;
         }catch (SQLException e) {
@@ -107,11 +107,11 @@ public class LocalizacaoRepository {
             pstmt.setString(1,nome);
             ResultSet rs  = pstmt.executeQuery();
             Localizacao local = new Localizacao(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"));
-            while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
-            }
+//            while (rs.next()) {
+//                System.out.println(rs.getInt("id") +  "\t" +
+//                        rs.getString("nome") + "\t" +
+//                        rs.getString("descricao"));
+//            }
             pstmt.close();
             return local;
         }catch (SQLException e) {

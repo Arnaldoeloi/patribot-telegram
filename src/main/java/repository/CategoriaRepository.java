@@ -63,9 +63,9 @@ public class CategoriaRepository {
             List<Categoria> categorias = new ArrayList<Categoria>();
             while (rs.next()) {
                 categorias.add(new Categoria(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao")));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+//                System.out.println(rs.getInt("id") +  "\t" +
+//                        rs.getString("nome") + "\t" +
+//                        rs.getString("descricao"));
             }
             stmt.close();
             return categorias;
@@ -85,11 +85,11 @@ public class CategoriaRepository {
             pstmt.setInt(1,id);
             ResultSet rs  = pstmt.executeQuery();
             Categoria categoria = new Categoria(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"));
-            while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
-            }
+//            while (rs.next()) {
+//                System.out.println(rs.getInt("id") +  "\t" +
+//                        rs.getString("nome") + "\t" +
+//                        rs.getString("descricao"));
+//            }
             pstmt.close();
             return categoria;
         }catch (SQLException e) {
