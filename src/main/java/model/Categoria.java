@@ -1,8 +1,6 @@
 package model;
 
-public class Categoria {
-    private Integer id;
-    private String  nome, descricao;
+public class Categoria extends Abstract{
 
 
     public Categoria( String nome, String descricao) {

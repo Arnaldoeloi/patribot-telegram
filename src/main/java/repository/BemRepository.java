@@ -97,7 +97,8 @@ public class BemRepository {
                 bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
                 System.out.println(rs.getInt("id") +  "\t" +
                         rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+                        rs.getString("descricao") + "\t" +
+                        "Localizacao: "+ local.getNome());
             }
             stmt.close();
             return bens;
