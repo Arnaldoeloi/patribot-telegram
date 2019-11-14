@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Date;
 
-public class Bem  {
-    private Integer id ;
-    private String nome, descricao;
+public class Bem extends Abstract {
     private Localizacao localizacao;
     private Categoria categoria;
 

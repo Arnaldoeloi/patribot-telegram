@@ -1,8 +1,7 @@
 package model;
 
-public class Localizacao {
-    private String nome, descricao;
-    private Integer id;
+public class Localizacao extends  Abstract{
+
     public Localizacao(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;

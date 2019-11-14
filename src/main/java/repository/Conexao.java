@@ -6,6 +6,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Conexao {
+
+    private static Conexao conexao = new Conexao();
+
+    private Conexao(){
+
+    }
+    public static Conexao getConexao() {
+        return conexao;
+    }
+
     private  Connection conn ;
 
     public  boolean connect() {

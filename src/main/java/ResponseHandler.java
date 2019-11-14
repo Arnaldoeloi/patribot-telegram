@@ -54,13 +54,13 @@ public class ResponseHandler {
             System.out.println("DISPLAY_DOS_BOTOES");
 
             if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_BEM) ){
-                Conexao con = new Conexao();
+                Conexao con = Conexao.getConexao();
                 LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(con);
                 localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
                 salvarObjBem(chatId);
             }else{
                 if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_PARA_MOVER_BEM)){
-                    Conexao con = new Conexao();
+                    Conexao con = Conexao.getConexao();
                     BemService bemService = new BemService(con);
                     bemService.changeLocation(bemTemp.getId(), Integer.parseInt(buttonId.replaceAll("[\\D]", "")) );
                     try {
@@ -75,7 +75,7 @@ public class ResponseHandler {
                     replyWithBackButton(chatId);
                 }
                 if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_BUSCA_BEM)){
-                    Conexao con = new Conexao();
+                    Conexao con = Conexao.getConexao();
                     LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(con);
                     localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
                     BemRepository bemRepository = new BemRepository(con);
@@ -115,7 +115,7 @@ public class ResponseHandler {
 
                 }
                 if(buttonId.contains("findCategoria") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_CATEGORIA_BEM)){
-                    Conexao con = new Conexao();
+                    Conexao con = Conexao.getConexao();
                     CategoriaRepository categoriaRepository = new CategoriaRepository(con);
                     categoriaTemp = categoriaRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
                     chatStates.put(chatId, ChatStateMachine.ESPERANDO_LOCALIZACAO_BEM);
@@ -196,7 +196,7 @@ public class ResponseHandler {
                     .enableHtml(true)
                     .setChatId(chatId)
             );
-            Conexao con = new Conexao();
+            Conexao con = Conexao.getConexao();
             BemService bemService = new BemService(con);
             for(Bem bem : bemService.getRelatorio()){
                 sender.execute(new SendMessage()
@@ -264,7 +264,7 @@ public class ResponseHandler {
         }
     }
     private void replyCadastrarBem(long chatId){
-        Conexao con = new Conexao();
+        Conexao con = Conexao.getConexao();
         LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(con);
         CategoriaRepository categoriaRepository = new CategoriaRepository(con);
 
@@ -369,7 +369,7 @@ public class ResponseHandler {
     private void replyListarCategorias(long chatId) {
         if (chatStates.get(chatId).equals(ChatStateMachine.LISTANDO_CATEGORIAS)) {
             System.out.println("replyListarCategorias");
-            Conexao conexao = new Conexao();
+            Conexao conexao = Conexao.getConexao();
             CategoriaRepository categoriaRepository = new CategoriaRepository(conexao);
             categoriaRepository.criarTabela();
             try {
@@ -388,7 +388,7 @@ public class ResponseHandler {
     }
     private void replyListarLocalizacoes(long chatId) {
         if (chatStates.get(chatId).equals(ChatStateMachine.LISTANDO_LOCALIZACOES)) {
-            Conexao conexao = new Conexao();
+            Conexao conexao = Conexao.getConexao();
             LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
             localizacaoRepository.criarTabela();
             try {
@@ -408,7 +408,7 @@ public class ResponseHandler {
     private void replyListarBens(long chatId) {
         if (chatStates.get(chatId).equals(ChatStateMachine.LISTANDO_BENS)) {
             System.out.println("replyListarBens");
-            Conexao conexao = new Conexao();
+            Conexao conexao = Conexao.getConexao();
             BemRepository bemRepository = new BemRepository(conexao);
             bemRepository.criarTabela();
             try {
@@ -425,7 +425,7 @@ public class ResponseHandler {
         }
     }
     private void salvarObjCategoria(long chatId){
-        Conexao conexao = new Conexao();
+        Conexao conexao =Conexao.getConexao();
         CategoriaRepository categoriaRepository = new CategoriaRepository(conexao);
         Categoria categoria = new Categoria(commandsHistory.get(0), commandsHistory.get(1));
         commandsHistory.clear();
@@ -433,7 +433,7 @@ public class ResponseHandler {
         replyWithBackButton(chatId);
     }
     private void salvarObjLocalizacao(long chatId){
-        Conexao conexao = new Conexao();
+        Conexao conexao = Conexao.getConexao();
         LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
         Localizacao localizacao = new Localizacao(commandsHistory.get(0), commandsHistory.get(1));
         commandsHistory.clear();
@@ -441,7 +441,7 @@ public class ResponseHandler {
         replyWithBackButton(chatId);
     }
     private void salvarObjBem(long chatId){
-        Conexao conexao = new Conexao();
+        Conexao conexao = Conexao.getConexao();
         BemRepository bemRepository = new BemRepository(conexao);
         Bem bem = new Bem(commandsHistory.get(0), commandsHistory.get(1), localizacaoTemp, categoriaTemp);
         commandsHistory.clear();
@@ -517,7 +517,7 @@ public class ResponseHandler {
                 break;
             case ESPERANDO_NOME_BUSCA_BEM:
                 try {
-                    Conexao con = new Conexao();
+                    Conexao con = Conexao.getConexao();
                     BemRepository bemRepository = new BemRepository(con);
                     List<Bem> bens = bemRepository.findByName(name);
                     if (!bens.isEmpty()) {
@@ -542,7 +542,7 @@ public class ResponseHandler {
                 break;
             case ESPERANDO_DESCRICAO_BUSCA_BEM:
                 try {
-                    Conexao con = new Conexao();
+                    Conexao con =Conexao.getConexao();
                     BemRepository bemRepository = new BemRepository(con);
                     List<Bem> bens = bemRepository.findByDescription(name);
                     if (!bens.isEmpty()) {
@@ -585,7 +585,7 @@ public class ResponseHandler {
     }
     public void findAndSetBemTemp(long chatId, String unformattedId){
         try {
-            Conexao con = new Conexao();
+            Conexao con = Conexao.getConexao();
             BemRepository bemRepository = new BemRepository(con);
             bemTemp = bemRepository.findById(Integer.parseInt(unformattedId.replaceAll("[\\D]", "")));
             if (bemTemp != null) {

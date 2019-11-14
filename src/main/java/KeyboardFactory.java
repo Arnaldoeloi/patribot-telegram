@@ -77,7 +77,7 @@ public class KeyboardFactory {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
 
-        Conexao con = new Conexao();
+        Conexao con = Conexao.getConexao();
         CategoriaRepository categoriaRepository = new CategoriaRepository(con);
 
         for(Categoria categoria : categoriaRepository.findall()){
@@ -93,7 +93,7 @@ public class KeyboardFactory {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
 
-        Conexao con = new Conexao();
+        Conexao con = Conexao.getConexao();
         LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(con);
 
         for(Localizacao localizacao : localizacaoRepository.findall()){

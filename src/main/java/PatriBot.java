@@ -34,7 +34,7 @@ public class PatriBot extends AbilityBot{
         * Cria o banco e suas tabelas caso não existam.
         *
         * */
-        Conexao conexao = new Conexao();
+        Conexao conexao = Conexao.getConexao();
         LocalizacaoRepository localizacaoRepository = new LocalizacaoRepository(conexao);
         localizacaoRepository.criarTabela();
         CategoriaRepository categoriaRepository= new CategoriaRepository(conexao);
