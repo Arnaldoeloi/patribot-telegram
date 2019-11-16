@@ -33,7 +33,9 @@ public class ResponseHandler {
     private CategoriaRepository categoriaRepository;
     private LocalizacaoRepository localizacaoRepository;
     private BemService bemService;
+
     /**
+     * Constructs the ResponseHandler given a MessageSender and a DBContext to work on.
      * @param sender
      * @param db
      */
@@ -54,9 +56,10 @@ public class ResponseHandler {
     }
 
     /**
+     * Sets the ChatStateMachine to wait for initial command.
      * @param chatId
      */
-    public void aguardandoComando(long chatId) {
+    public void waitingForCommand(long chatId) {
         this.commandsHistory.clear();
         chatStates.put(chatId, ChatStateMachine.AGUARDANDO_COMANDO);
         replyWithHtmlMarkup(chatId,Constants.START_REPLY);
@@ -64,6 +67,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Listen to buttons clicked by user with the ChatID given by parameter.
      * @param chatId
      * @param buttonId
      */
@@ -123,7 +127,7 @@ public class ResponseHandler {
             switch (buttonId){
                 case Constants.VOLTAR_AO_MENU:
                     chatStates.put(chatId, ChatStateMachine.AGUARDANDO_COMANDO);
-                    aguardandoComando(chatId);
+                    waitingForCommand(chatId);
                     break;
                 case Constants.CADASTRAR_BEM:
                     chatStates.put(chatId, ChatStateMachine.ESPERANDO_NOME_BEM);
@@ -178,6 +182,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Sends user with the given chatId informations about stored data.
      * @param chatId
      */
     private void replyGerarRelatorio(long chatId){
@@ -189,6 +194,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text "Qual o código do bem que você deseja fazer a movimentação?".
      * @param chatId
      */
     public void replyEsperandoCodigoParaBuscar(long chatId){
@@ -196,6 +202,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text "Qual a descrição do bem que você deseja encontrar?".
      * @param chatId
      */
     public void replyEsperandoDescricaoParaBuscar(long chatId){
@@ -203,6 +210,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text "Qual o nome do bem?".
      * @param chatId
      */
     public void replyEsperandoNomeParaBuscar(long chatId){
@@ -210,6 +218,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text "<b>Selecione a localizacao dos bens abaixo:</b>" and keyboard with locals associated to buttons.
      * @param chatId
      */
     public void replyEsperandoLocalizacaoParaBuscar(long chatId){
@@ -217,6 +226,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text "<b>Digite o código de busca do bem:</b>".
      * @param chatId
      */
     private void replyEsperandoCodigoBuscaBem(long chatId){
@@ -224,16 +234,17 @@ public class ResponseHandler {
     }
 
     /**
+     * Decide and answer user about if he can or not perform an store of Bem object.
      * @param chatId
      */
     private void replyCadastrarBem(long chatId){
         if(categoriaRepository.findall().isEmpty()){
             replyWithHtmlMarkup(chatId, "\n <b>É necessário cadastrar pelo menos uma categoria antes de cadastrar um bem.</b>\n ");
-            aguardandoComando(chatId);
+            waitingForCommand(chatId);
         }
         if(localizacaoRepository.findall().isEmpty()){
             replyWithHtmlMarkup(chatId, "\n <b>É necessário cadastrar pelo menos uma localizacao antes de cadastrar um bem.</b>\n ");
-            aguardandoComando(chatId);
+            waitingForCommand(chatId);
         }
         if(chatStates.get(chatId).equals(ChatStateMachine.ESPERANDO_NOME_BEM)) {
             replyWithHtmlMarkup(chatId,"\n <i>Cadastrando bem</i>\n ");
@@ -242,6 +253,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with back button and change the ChatState to wait for initial command.
      * @param chatId
      */
     private void replyWithBackButton(long chatId) {
@@ -253,6 +265,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text to store a location.
      * @param chatId
      */
     private void replyCadastrarLocalizacao(long chatId){
@@ -263,6 +276,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with text to store a category.
      * @param chatId
      */
     private void replyCadastrarCategoria(long chatId){
@@ -273,6 +287,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with a list of categories.
      * @param chatId
      */
     private void replyListarCategorias(long chatId) {
@@ -285,6 +300,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with a list of locations.
      * @param chatId
      */
     private void replyListarLocalizacoes(long chatId) {
@@ -297,6 +313,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Reply with a list of bem objects.
      * @param chatId
      */
     private void replyListarBens(long chatId) {
@@ -309,6 +326,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Save category with what user answered.
      * @param chatId
      */
     private void salvarObjCategoria(long chatId){
@@ -319,6 +337,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Save location with what user answered.
      * @param chatId
      */
     private void salvarObjLocalizacao(long chatId){
@@ -329,6 +348,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Save bem object with what user answered.
      * @param chatId
      */
     private void salvarObjBem(long chatId){
@@ -339,6 +359,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Receive and treat text input from PatriBot.
      * @param chatId
      * @param name
      */
@@ -409,6 +430,7 @@ public class ResponseHandler {
     }
 
     /**
+     * Find and set bem temp given an ID.
      * @param chatId
      * @param unformattedId
      */
@@ -433,6 +455,11 @@ public class ResponseHandler {
         }
     }
 
+    /**
+     * Generic way to reply to user with a text.
+     * @param chatId
+     * @param text
+     */
     private void replyWithHtmlMarkup(long chatId, String text){
         try {
             sender.execute(new SendMessage()
@@ -444,6 +471,13 @@ public class ResponseHandler {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Generic way to reply to user with a list of buttons.
+     * @param chatId
+     * @param text
+     * @param keyboard
+     */
     private void replyWithInlineKeyboard(long chatId, String text, InlineKeyboardMarkup keyboard){
         try {
             sender.execute(new SendMessage()

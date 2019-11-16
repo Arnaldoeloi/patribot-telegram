@@ -1,15 +1,9 @@
 import Constants.Constants;
-import org.jetbrains.annotations.NotNull;
-import org.telegram.abilitybots.api.db.DBContext;
 import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
 //import org.telegram.telegrambots.Constants;
-import org.telegram.telegrambots.bots.DefaultBotOptions;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import repository.BemRepository;
 import repository.CategoriaRepository;
@@ -17,10 +11,8 @@ import repository.Conexao;
 import repository.LocalizacaoRepository;
 
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 import static org.telegram.abilitybots.api.objects.Flag.MESSAGE;
-import static org.telegram.abilitybots.api.objects.Flag.REPLY;
 import static org.telegram.abilitybots.api.objects.Locality.ALL;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
@@ -69,7 +61,7 @@ public class PatriBot extends AbilityBot{
                 .info(Constants.START_DESCRIPTION)
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> responseHandler.aguardandoComando(ctx.chatId()))
+                .action(ctx -> responseHandler.waitingForCommand(ctx.chatId()))
                 .build();
     }
 
