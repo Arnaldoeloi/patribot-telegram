@@ -75,7 +75,7 @@ public class LocalizacaoRepository {
         return null;
     }
 
-    public Localizacao findById(Integer id){
+    public Localizacao findById(Integer id) throws LocalizacaoNotFoundException {
         String sql = "SELECT * "
                 + "FROM localizacao WHERE id = ?";
         try {
@@ -92,13 +92,13 @@ public class LocalizacaoRepository {
             pstmt.close();
             return local;
         }catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+            e.printStackTrace();
+            throw new LocalizacaoNotFoundException();
         }finally {
             conexaoSQL.desconect();
         }
     }
-    public Localizacao findByName(String nome){
+    public Localizacao findByName(String nome) throws LocalizacaoNotFoundException{
         String sql = "SELECT * "
                 + "FROM localizacao WHERE nome = ?";
         try {
@@ -107,18 +107,25 @@ public class LocalizacaoRepository {
             pstmt.setString(1,nome);
             ResultSet rs  = pstmt.executeQuery();
             Localizacao local = new Localizacao(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"));
-//            while (rs.next()) {
-//                System.out.println(rs.getInt("id") +  "\t" +
-//                        rs.getString("nome") + "\t" +
-//                        rs.getString("descricao"));
-//            }
+
             pstmt.close();
             return local;
         }catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+            e.printStackTrace();
+            throw new LocalizacaoNotFoundException();
         }finally {
             conexaoSQL.desconect();
+        }
+    }
+
+    public static class LocalizacaoNotFoundException extends Exception {
+        public LocalizacaoNotFoundException() {
+            super();
+        }
+
+        @Override
+        public String getMessage() {
+            return "Localização não foi encontrada.";
         }
     }
 }

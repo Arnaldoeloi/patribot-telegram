@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ */
 public class ResponseHandler {
     private final MessageSender sender;
     private final Map<Long, ChatStateMachine> chatStates;
@@ -67,32 +70,53 @@ public class ResponseHandler {
     public void replyToButtons(long chatId, String buttonId){
         if(buttonId.contains("findLocalizacao") || buttonId.contains("findCategoria")){
             if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_BEM) ){
-                localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
+                try {
+                    localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
+                } catch (LocalizacaoRepository.LocalizacaoNotFoundException e) {
+                    e.printStackTrace();
+                }
                 replyWithHtmlMarkup(chatId,"<b>Bem cadastrado com sucesso!</b>");
                 salvarObjBem(chatId);
             }else{
                 if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_PARA_MOVER_BEM)){
-                    bemService.changeLocation(bemTemp.getId(), Integer.parseInt(buttonId.replaceAll("[\\D]", "")) );
+                    try {
+                        bemService.changeLocation(bemTemp.getId(), Integer.parseInt(buttonId.replaceAll("[\\D]", "")) );
+                    } catch (BemRepository.BemNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (LocalizacaoRepository.LocalizacaoNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     replyWithHtmlMarkup(chatId, "O bem foi movido com sucesso para <b>"+bemTemp.getLocalizacao().getNome()+"</b>.");
                     replyWithBackButton(chatId);
                 }
                 if(buttonId.contains("findLocalizacao") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_LOCALIZACAO_BUSCA_BEM)){
-                    localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
+                    try {
+                        localizacaoTemp = localizacaoRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
+                    } catch (LocalizacaoRepository.LocalizacaoNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
                     replyWithHtmlMarkup(chatId, "Os bens dessa localização podem ser encontrados abaixo:");
-                    List<Bem> bens = bemRepository.findByLocal(localizacaoTemp.getNome());
-                    if(!bens.isEmpty()){
+                    List<Bem> bens = null;
+                    try {
+                        bens = bemRepository.findByLocal(localizacaoTemp.getNome());
                         for(Bem bem : bens){
                             replyWithHtmlMarkup(chatId, bem.toString());
                         }
-                    }else{
+                    } catch (BemRepository.BemNotFoundException e) {
+                        e.printStackTrace();
                         replyWithHtmlMarkup(chatId,"<b>Não existem bens cadastrados nesta localização.</b>");
                     }
                     replyWithBackButton(chatId);
                 }
                 if(buttonId.contains("findCategoria") && (chatStates.get(chatId) == ChatStateMachine.ESPERANDO_CATEGORIA_BEM)){
-                    categoriaTemp = categoriaRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
-                    chatStates.put(chatId, ChatStateMachine.ESPERANDO_LOCALIZACAO_BEM);
-                    replyWithInlineKeyboard(chatId, "Selecione abaixo a localização do bem:", KeyboardFactory.ReplyKeyboardWithLocalizacoes());
+                    try{
+                        categoriaTemp = categoriaRepository.findById(Integer.parseInt(buttonId.replaceAll("[\\D]", ""))); //substitui tudo que não for digito com um espaço vazio para fazer o parseInt
+                        chatStates.put(chatId, ChatStateMachine.ESPERANDO_LOCALIZACAO_BEM);
+                        replyWithInlineKeyboard(chatId, "Selecione abaixo a localização do bem:", KeyboardFactory.ReplyKeyboardWithLocalizacoes());
+                    }catch (CategoriaRepository.CategoriaNotFoundException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }else{
@@ -353,24 +377,26 @@ public class ResponseHandler {
                 replyWithInlineKeyboard(chatId, "Selecione abaixo a categoria do bem:", KeyboardFactory.ReplyKeyboardWithCategorias());
                 break;
             case ESPERANDO_NOME_BUSCA_BEM:
-                List<Bem> bens = bemRepository.findByName(name);
-                if (!bens.isEmpty()) {
+                try{
+                    List<Bem> bens = bemRepository.findByName(name);
                     for (Bem bem : bens) {
                         replyWithHtmlMarkup(chatId, bem.toString());
                     }
-                }else{
+                }catch(BemRepository.BemNotFoundException e){
                     replyWithHtmlMarkup(chatId, "<b>Não foram encontrados bem(ns) com esse nome.</b>");
+                    e.printStackTrace();
                 }
                 replyWithBackButton(chatId);
                 break;
             case ESPERANDO_DESCRICAO_BUSCA_BEM:
-                List<Bem> bensTemp = bemRepository.findByDescription(name);
-                if (!bensTemp.isEmpty()) {
-                    for (Bem bem : bensTemp) {
-                        replyWithHtmlMarkup(chatId, bem.toString());
-                    }
-                }else{
+                try{
+                    List<Bem> bensTemp = bemRepository.findByDescription(name);
+                        for (Bem bem : bensTemp) {
+                            replyWithHtmlMarkup(chatId, bem.toString());
+                        }
+                }catch (BemRepository.BemNotFoundException e){
                     replyWithHtmlMarkup(chatId,"<b>Não foram encontrados bem com essa descrição.</b>");
+                    e.printStackTrace();
                 }
                 replyWithBackButton(chatId);
                 break;
@@ -388,21 +414,20 @@ public class ResponseHandler {
      */
     public void findAndSetBemTemp(long chatId, String unformattedId){
         try {
-            bemTemp = bemRepository.findById(Integer.parseInt(unformattedId.replaceAll("[\\D]", "")));
-            if (bemTemp != null) {
+            try{
+                bemTemp = bemRepository.findById(Integer.parseInt(unformattedId.replaceAll("[\\D]", "")));
                 sender.execute(new SendMessage()
                         .setText(bemTemp.toString())
                         .enableHtml(true)
                         .setChatId(chatId)
                 );
-            } else {
+            }catch (BemRepository.BemNotFoundException e){
                 sender.execute(new SendMessage()
                         .setText("<b>Não há nenhum bem com esse código.</b>")
                         .enableHtml(true)
                         .setChatId(chatId)
                 );
             }
-
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

@@ -76,7 +76,7 @@ public class CategoriaRepository {
         }
         return null;
     }
-    public Categoria findById(Integer id){
+    public Categoria findById(Integer id) throws CategoriaNotFoundException{
         String sql = "SELECT * "
                 + "FROM categoria WHERE id = ?";
         try {
@@ -85,18 +85,24 @@ public class CategoriaRepository {
             pstmt.setInt(1,id);
             ResultSet rs  = pstmt.executeQuery();
             Categoria categoria = new Categoria(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"));
-//            while (rs.next()) {
-//                System.out.println(rs.getInt("id") +  "\t" +
-//                        rs.getString("nome") + "\t" +
-//                        rs.getString("descricao"));
-//            }
             pstmt.close();
             return categoria;
         }catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
+            throw new CategoriaNotFoundException();
         }finally {
             conexaoSQL.desconect();
+        }
+    }
+
+    public static class CategoriaNotFoundException extends Exception {
+        public CategoriaNotFoundException() {
+            super();
+        }
+
+        @Override
+        public String getMessage() {
+            return "Categoria não foi encontrada.";
         }
     }
 }

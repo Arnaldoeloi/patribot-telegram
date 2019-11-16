@@ -59,7 +59,7 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
-    public Bem findById(Integer id){
+    public Bem findById(Integer id) throws BemNotFoundException{
         String sql = "SELECT * "
                 + "FROM bem WHERE id = ?";
         try {
@@ -67,8 +67,18 @@ public class BemRepository {
             PreparedStatement pstmt  = conexaoSQL.getConn().prepareStatement(sql);
             pstmt.setInt(1,id);
             ResultSet rs  = pstmt.executeQuery();
-            Localizacao local = localizacaoRepository.findById(rs.getInt("localizacao"));
-            Categoria categoria = categoriaRepository.findById(rs.getInt("categoria"));
+            Localizacao local = null;
+            try {
+                local = localizacaoRepository.findById(rs.getInt("localizacao"));
+            } catch (LocalizacaoRepository.LocalizacaoNotFoundException e) {
+                e.printStackTrace();
+            }
+            Categoria categoria = null;
+            try {
+                categoria = categoriaRepository.findById(rs.getInt("categoria"));
+            } catch (CategoriaRepository.CategoriaNotFoundException e) {
+                e.printStackTrace();
+            }
             Bem bem = new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria);
                 System.out.println(rs.getInt("id") +  "\t" +
                         rs.getString("nome") + "\t" +
@@ -76,8 +86,8 @@ public class BemRepository {
             pstmt.close();
             return bem;
         }catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+            e.printStackTrace();
+            throw new BemNotFoundException();
         }finally {
             conexaoSQL.desconect();
         }
@@ -92,13 +102,19 @@ public class BemRepository {
             ResultSet rs    = stmt.executeQuery(sql);
             List<Bem> bens = new ArrayList<Bem>();
             while (rs.next()) {
-                local = localizacaoRepository.findById(rs.getInt("localizacao"));
-                categoria = categoriaRepository.findById(rs.getInt("categoria"));
-                bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao") + "\t" +
-                        "Localizacao: "+ local.getNome());
+                try {
+                    local = localizacaoRepository.findById(rs.getInt("localizacao"));
+                    categoria = categoriaRepository.findById(rs.getInt("categoria"));
+                    bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
+                    System.out.println(rs.getInt("id") +  "\t" +
+                            rs.getString("nome") + "\t" +
+                            rs.getString("descricao") + "\t" +
+                            "Localizacao: "+ local.getNome());
+                } catch (LocalizacaoRepository.LocalizacaoNotFoundException e) {
+                    e.printStackTrace();
+                }catch (CategoriaRepository.CategoriaNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             stmt.close();
             return bens;
@@ -110,9 +126,14 @@ public class BemRepository {
         return null;
     }
 
-    public List<Bem> findByLocal (String localizacao){
+    public List<Bem> findByLocal (String localizacao) throws BemNotFoundException{
         String sql = "SELECT * FROM bem WHERE localizacao = ?";
-        Localizacao local = localizacaoRepository.findByName(localizacao);
+        Localizacao local = null;
+        try {
+            local = localizacaoRepository.findByName(localizacao);
+        } catch (LocalizacaoRepository.LocalizacaoNotFoundException e) {
+            e.printStackTrace();
+        }
         Categoria categoria ;
         try {
             conexaoSQL.connect();
@@ -121,11 +142,18 @@ public class BemRepository {
             ResultSet rs  = pstmt.executeQuery();
             List<Bem> bens = new ArrayList<Bem>();
             while (rs.next()) {
-                categoria = categoriaRepository.findById(rs.getInt("categoria"));
-                bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+                try {
+                    categoria = categoriaRepository.findById(rs.getInt("categoria"));
+                    bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
+                    System.out.println(rs.getInt("id") +  "\t" +
+                            rs.getString("nome") + "\t" +
+                            rs.getString("descricao"));
+                } catch (CategoriaRepository.CategoriaNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(bens.isEmpty()){
+                throw new BemNotFoundException();
             }
             pstmt.close();
             return bens;
@@ -136,7 +164,7 @@ public class BemRepository {
         }
         return null;
     }
-    public List<Bem> findByName(String nome){
+    public List<Bem> findByName(String nome) throws BemNotFoundException{
         String sql = "SELECT * "
                 + "FROM bem WHERE nome LIKE ?";
         try {
@@ -148,14 +176,23 @@ public class BemRepository {
             Categoria categoria = null ;
             List<Bem> bens = new ArrayList<Bem>();
             while (rs.next()) {
-                local = localizacaoRepository.findById(rs.getInt("localizacao"));
-                categoria = categoriaRepository.findById(rs.getInt("categoria"));
-                bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+                try{
+                    local = localizacaoRepository.findById(rs.getInt("localizacao"));
+                    categoria = categoriaRepository.findById(rs.getInt("categoria"));
+                    bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
+                    System.out.println(rs.getInt("id") +  "\t" +
+                            rs.getString("nome") + "\t" +
+                            rs.getString("descricao"));
+                }catch(LocalizacaoRepository.LocalizacaoNotFoundException e){
+                    e.printStackTrace();
+                }catch (CategoriaRepository.CategoriaNotFoundException e){
+                    e.printStackTrace();
+                }
             }
             pstmt.close();
+            if(bens.isEmpty()){
+                throw new BemNotFoundException();
+            }
             return bens;
         }catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -164,7 +201,7 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
-    public List<Bem> findByDescription(String descricao){
+    public List<Bem> findByDescription(String descricao) throws BemNotFoundException{
         String sql = "SELECT * "
                 + "FROM bem WHERE descricao LIKE ?";
         try {
@@ -176,12 +213,21 @@ public class BemRepository {
             Categoria categoria = null ;
             List<Bem> bens = new ArrayList<Bem>();
             while (rs.next()) {
-                local = localizacaoRepository.findById(rs.getInt("localizacao"));
-                categoria = categoriaRepository.findById(rs.getInt("categoria"));
-                bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+                try{
+                    local = localizacaoRepository.findById(rs.getInt("localizacao"));
+                    categoria = categoriaRepository.findById(rs.getInt("categoria"));
+                    bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
+                    System.out.println(rs.getInt("id") +  "\t" +
+                            rs.getString("nome") + "\t" +
+                            rs.getString("descricao"));
+                }catch (LocalizacaoRepository.LocalizacaoNotFoundException e){
+                    e.printStackTrace();
+                }catch (CategoriaRepository.CategoriaNotFoundException e){
+                    e.printStackTrace();
+                }
+            }
+            if(bens.isEmpty()){
+                throw new BemNotFoundException();
             }
             pstmt.close();
             return bens;
@@ -225,13 +271,20 @@ public class BemRepository {
             Statement stmt  = conexaoSQL.getConn().createStatement();
             ResultSet rs    = stmt.executeQuery(sql);
             List<Bem> bens = new ArrayList<Bem>();
-            while (rs.next()) {
-                local = localizacaoRepository.findById(rs.getInt("localizacao"));
-                categoria = categoriaRepository.findById(rs.getInt("categoria"));
-                bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("nome") + "\t" +
-                        rs.getString("descricao"));
+            try {
+                while (rs.next()) {
+                    local = localizacaoRepository.findById(rs.getInt("localizacao"));
+                    categoria = categoriaRepository.findById(rs.getInt("categoria"));
+                    bens.add(new Bem(rs.getInt("id"),rs.getString("nome"),rs.getString("descricao"),local,categoria));
+                    System.out.println(rs.getInt("id") +  "\t" +
+                            rs.getString("nome") + "\t" +
+                            rs.getString("descricao"));
+                }
+
+            }catch(LocalizacaoRepository.LocalizacaoNotFoundException e){
+                e.printStackTrace();
+            }catch (CategoriaRepository.CategoriaNotFoundException e){
+                e.printStackTrace();
             }
             stmt.close();
             return bens;
@@ -241,5 +294,16 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
         return null;
+    }
+
+    public static class BemNotFoundException extends Exception {
+        public BemNotFoundException() {
+            super();
+        }
+
+        @Override
+        public String getMessage() {
+            return "Bem não foi encontrado.";
+        }
     }
 }
