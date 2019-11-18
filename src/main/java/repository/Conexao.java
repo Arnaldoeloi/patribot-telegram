@@ -12,12 +12,20 @@ public class Conexao {
     private Conexao(){
 
     }
+    /**
+     * função que garante a existencia de uma unica chamada do objeto Conexão '/'.
+     * @return Objeto Conexao
+     */
     public static Conexao getConexao() {
         return conexao;
     }
 
     private  Connection conn ;
 
+    /**
+     * Cria conexao com o banco '/'.
+     * @return boolean que informa sucesso na conexão
+     */
     public  boolean connect() {
 
         try {
@@ -33,7 +41,10 @@ public class Conexao {
         }
         return false;
     }
-
+    /**
+     * descnecta com o banco '/'.
+     * @return boolean que informa sucesso na ação
+     */
     public  boolean desconect(){
         try {
             if (conn != null) {
@@ -46,6 +57,10 @@ public class Conexao {
         }
     }
 
+    /**
+     * Função de retorn de conexão'/'.
+     * @return a interface connection da biblioteca
+     */
     public  Connection getConn() {
         return conn;
     }

@@ -16,12 +16,17 @@ public class BemRepository {
     private final Conexao conexaoSQL;
     private  final CategoriaRepository categoriaRepository;
     private  final LocalizacaoRepository localizacaoRepository;
+
     public BemRepository(Conexao conexaoSQL) {
         this.conexaoSQL = conexaoSQL;
         categoriaRepository = new CategoriaRepository(conexaoSQL);
         localizacaoRepository = new LocalizacaoRepository(conexaoSQL);
     }
 
+    /**
+     * Cria tabela de Bem no banco'/'.
+     * @return
+     */
     public  void criarTabela(){
         String sql = "CREATE TABLE IF NOT EXISTS bem(\n"
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
@@ -42,6 +47,11 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
+
+    /**
+     * Insere um bem no tabela Bem'/'.
+     * @param bem
+     */
     public void inserir(Bem bem ){
         String sql = "INSERT INTO bem(nome,descricao,localizacao,categoria) VALUES(?,?,?,?)";
         conexaoSQL.connect();
@@ -59,6 +69,11 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
+    /**
+     * Busca bem  por codigo(id)'/'.
+     * @param id
+     * @return Bem
+     */
     public Bem findById(Integer id) throws BemNotFoundException{
         String sql = "SELECT * "
                 + "FROM bem WHERE id = ?";
@@ -92,6 +107,10 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
+    /**
+     * Busca todos os dados na tabela'/'.
+     * @return lista de bens
+     */
     public List<Bem> findall(){
         String sql = "SELECT * FROM bem";
         Localizacao local;
@@ -126,6 +145,11 @@ public class BemRepository {
         return null;
     }
 
+    /**
+     * Buscar bens por localizacao'/'.
+     * @param localizacao
+     * @return lista de bens
+     */
     public List<Bem> findByLocal (String localizacao) throws BemNotFoundException{
         String sql = "SELECT * FROM bem WHERE localizacao = ?";
         Localizacao local = null;
@@ -164,6 +188,12 @@ public class BemRepository {
         }
         return null;
     }
+
+    /**
+     * Busca bem  por nome'/'.
+     * @param nome
+     * @return lista de bens com mesmo nome ou sub string do nome
+     */
     public List<Bem> findByName(String nome) throws BemNotFoundException{
         String sql = "SELECT * "
                 + "FROM bem WHERE nome LIKE ?";
@@ -201,6 +231,11 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
+    /**
+     * Buscar por substring de descrição'/'.
+     * @param descricao
+     * @return lista de bens
+     */
     public List<Bem> findByDescription(String descricao) throws BemNotFoundException{
         String sql = "SELECT * "
                 + "FROM bem WHERE descricao LIKE ?";
@@ -238,6 +273,11 @@ public class BemRepository {
             conexaoSQL.desconect();
         }
     }
+    /**
+     * Atualiza um bem existente na tabela'/'.
+     * @param bem
+     * @return lista de bens
+     */
     public void update( Bem bem) {
         String sql = "UPDATE bem SET nome = ? , "
                 + "descricao = ? , localizacao = ? , categoria = ? "
@@ -262,6 +302,10 @@ public class BemRepository {
         }
     }
 
+    /**
+     * Buscar todos '/'.
+     * @return lista de bens
+     */
     public List<Bem> findallOrder(){
         String sql = "SELECT * FROM bem ORDER BY localizacao ASC, categoria ASC, nome ASC;";
         Localizacao local;

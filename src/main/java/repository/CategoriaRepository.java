@@ -18,6 +18,10 @@ public class CategoriaRepository {
         conexaoSQL = conn;
     }
 
+    /**
+     * Cria tabela de categoria no banco'/'.
+     * @return
+     */
     public  void criarTabela(){
         String sql = "CREATE TABLE IF NOT EXISTS categoria(\n"
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
@@ -37,6 +41,11 @@ public class CategoriaRepository {
         }
 
     }
+    /**
+     * Adiciona uma nova categoria no banco'/'.
+     * @param categoria
+     * @return
+     */
     public void inserir(Categoria categoria){
         String sql = "INSERT INTO categoria(nome,descricao) VALUES(?,?)";
         conexaoSQL.connect();
@@ -53,6 +62,10 @@ public class CategoriaRepository {
         }
 
     }
+    /**
+     * Busca todos os dados da tabela categoria'/'.
+     * @return lista de categorias
+     */
     public List<Categoria> findall(){
         String sql = "SELECT * FROM categoria";
 
@@ -76,6 +89,11 @@ public class CategoriaRepository {
         }
         return null;
     }
+    /**
+     * Busca categoria por id'/'.
+     * @param id
+     * @return categoria
+     */
     public Categoria findById(Integer id) throws CategoriaNotFoundException{
         String sql = "SELECT * "
                 + "FROM categoria WHERE id = ?";

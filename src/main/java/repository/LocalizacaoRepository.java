@@ -16,6 +16,10 @@ public class LocalizacaoRepository {
         conexaoSQL = conn;
     }
 
+    /**
+     * Cria tabela localizção no banco'/'.
+     * @return
+     */
     public  void criarTabela(){
         String sql = "CREATE TABLE IF NOT EXISTS localizacao(\n"
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
@@ -34,6 +38,11 @@ public class LocalizacaoRepository {
             conexaoSQL.desconect();
         }
     }
+    /**
+     * Adiciona uma nova localizção no banco'/'.
+     * @param local
+     * @return
+     */
     public void inserir(Localizacao local ){
         String sql = "INSERT INTO localizacao(nome,descricao) VALUES(?,?)";
         conexaoSQL.connect();
@@ -51,6 +60,10 @@ public class LocalizacaoRepository {
 
     }
 
+    /**
+     * Busca todas as localizção no banco'/'.
+     * @return lista de localizção
+     */
     public  List<Localizacao>  findall(){
         String sql = "SELECT * FROM localizacao";
 
@@ -75,6 +88,11 @@ public class LocalizacaoRepository {
         return null;
     }
 
+    /**
+     * Busca localização por id'/'.
+     * @param id
+     * @return localizção
+     */
     public Localizacao findById(Integer id) throws LocalizacaoNotFoundException {
         String sql = "SELECT * "
                 + "FROM localizacao WHERE id = ?";
@@ -98,6 +116,11 @@ public class LocalizacaoRepository {
             conexaoSQL.desconect();
         }
     }
+    /**
+     * Busca todas localização com substring em nome'/'.
+     * @param nome
+     * @return lista de localizção
+     */
     public Localizacao findByName(String nome) throws LocalizacaoNotFoundException{
         String sql = "SELECT * "
                 + "FROM localizacao WHERE nome = ?";
