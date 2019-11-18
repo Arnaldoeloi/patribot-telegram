@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KeyboardFactory {
+    /**
+     * Retorna um teclado com os commandos iniciais em formato de botão.
+     * @return
+     */
     public static InlineKeyboardMarkup ReplyKeyboardWithCommandButtons(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
@@ -62,6 +66,10 @@ public class KeyboardFactory {
         return inlineKeyboard;
     }
 
+    /**
+     * Retorna o botão voltar.
+     * @return
+     */
     public static InlineKeyboardMarkup ReplyKeyboardWithBackButton(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
@@ -73,6 +81,10 @@ public class KeyboardFactory {
         return inlineKeyboard;
     }
 
+    /**
+     * Retorna um teclado com todas as categorias cadastradas no banco de dados em formato de botões.
+     * @return
+     */
     public static InlineKeyboardMarkup ReplyKeyboardWithCategorias(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
@@ -88,7 +100,10 @@ public class KeyboardFactory {
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
     }
-
+    /**
+     * Retorna um teclado com todas as localizações cadastradas no banco de dados em formato de botões.
+     * @return
+     */
     public static InlineKeyboardMarkup ReplyKeyboardWithLocalizacoes(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();

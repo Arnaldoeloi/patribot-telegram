@@ -2,7 +2,6 @@ import Constants.Constants;
 import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
-//import org.telegram.telegrambots.Constants;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import repository.BemRepository;
@@ -17,9 +16,12 @@ import static org.telegram.abilitybots.api.objects.Locality.ALL;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
-
 public class PatriBot extends AbilityBot{
     private final ResponseHandler responseHandler;
+
+    /**
+     * Inicializa o bot.
+     */
     public PatriBot(){
         super(Constants.BOT_TOKEN, Constants.BOT_USERNAME);
         /**
@@ -40,20 +42,39 @@ public class PatriBot extends AbilityBot{
         responseHandler = new ResponseHandler(sender, db);
     }
 
+    /**
+     * Retorna o id do mestre desse robô, configurável em Constants.
+     * @return
+     */
     public int creatorId() {
         return Constants.CREATOR_ID;
     }
 
+    /**
+     * Chama a função replyToButtons na classe do responseHandler para inputs do tipo CALLBACK_QUERY
+     * @return
+     */
     public Reply replyToButtons(){
+        //Consumer: Interface funcional que recebe uma função à ser aplicada depois.
         Consumer<Update> action = upd -> responseHandler.replyToButtons(getChatId(upd), upd.getCallbackQuery().getData());
+        //Flag.CALLBACK_QUERY: identifica o tipo de Reply que veio do usuário como CALLBACK_QUERY, o dos botões.
         return Reply.of(action, Flag.CALLBACK_QUERY);
     }
 
+    /**
+     * Chama a função receiveInput na classe do responseHandler se o reply for message, tiver texto e não conter '/'.
+     * @return
+     */
     public Reply receiveInput(){
         Consumer<Update> action = upd -> responseHandler.receiveInput(getChatId(upd), upd.getMessage().getText());
-        return Reply.of(action, MESSAGE,update -> update.getMessage().hasText() && !update.getMessage().getText().contains("/"));
+        //Apenas chama o action se o reply for message, tiver texto e não conter /
+        return Reply.of(action, MESSAGE, update -> update.getMessage().hasText() && !update.getMessage().getText().contains("/"));
     }
 
+    /**
+     * Ao receber o comando start do usuário chama a função waitingForCommand no response handler.
+     * @return
+     */
     public Ability replyToStart(){
         return Ability
                 .builder()
