@@ -2,15 +2,79 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c209cb41-e959-499a-a1a1-da3ab58f54c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Abstract.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Abstract.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/ChatStateMachine.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/ChatStateMachine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/Constants/Constants.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/Constants/Constants.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/Constants/class-use/Constants.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/Constants/class-use/Constants.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/Constants/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/Constants/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/Constants/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/Constants/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/Constants/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/Constants/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/KeyboardFactory.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/KeyboardFactory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/PatriBot.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/PatriBot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/ResponseHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/ResponseHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/class-use/ChatStateMachine.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/class-use/ChatStateMachine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/class-use/KeyboardFactory.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/class-use/KeyboardFactory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/class-use/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/class-use/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/class-use/PatriBot.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/class-use/PatriBot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/class-use/ResponseHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/class-use/ResponseHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-14.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-15.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-16.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-17.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-18.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/model/Bem.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Bem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/model/Categoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Categoria.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/model/Localizacao.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Localizacao.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/class-use/Abstract.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/class-use/Abstract.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Abstract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Saveable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Bem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Bem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Categoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Localizacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Localizacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/model/class-use/Bem.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/class-use/Bem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/model/class-use/Categoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/class-use/Categoria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/model/class-use/Localizacao.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/class-use/Localizacao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/model/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/BemRepository.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/BemRepository.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/CategoriaRepository.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/CategoriaRepository.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/Conexao.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/Conexao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/LocalizacaoRepository.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/LocalizacaoRepository.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/class-use/BemRepository.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/class-use/BemRepository.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/class-use/CategoriaRepository.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/class-use/CategoriaRepository.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/class-use/Conexao.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/class-use/Conexao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/class-use/LocalizacaoRepository.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/class-use/LocalizacaoRepository.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/repository/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/repository/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/service/BemService.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/service/BemService.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/service/class-use/BemService.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/service/class-use/BemService.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/service/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/service/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/service/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/service/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/service/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/service/package-use.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KeyboardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KeyboardFactory.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

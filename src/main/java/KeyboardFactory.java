@@ -13,7 +13,7 @@ import java.util.List;
 public class KeyboardFactory {
     /**
      * Retorna um teclado com os commandos iniciais em formato de botão.
-     * @return
+     * @return O teclado com os botões iniciais.
      */
     public static InlineKeyboardMarkup ReplyKeyboardWithCommandButtons(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
@@ -68,7 +68,7 @@ public class KeyboardFactory {
 
     /**
      * Retorna o botão voltar.
-     * @return
+     * @return O teclado com o botão de voltar.
      */
     public static InlineKeyboardMarkup ReplyKeyboardWithBackButton(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
@@ -83,7 +83,7 @@ public class KeyboardFactory {
 
     /**
      * Retorna um teclado com todas as categorias cadastradas no banco de dados em formato de botões.
-     * @return
+     * @return O teclado com as categorias.
      */
     public static InlineKeyboardMarkup ReplyKeyboardWithCategorias(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
@@ -102,7 +102,7 @@ public class KeyboardFactory {
     }
     /**
      * Retorna um teclado com todas as localizações cadastradas no banco de dados em formato de botões.
-     * @return
+     * @return O teclado com as localizações.
      */
     public static InlineKeyboardMarkup ReplyKeyboardWithLocalizacoes(){
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
