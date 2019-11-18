@@ -1,11 +1,6 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.Date;
-
-public class Bem extends Abstract {
+public class Bem extends Saveable {
     private Localizacao localizacao;
     private Categoria categoria;
 

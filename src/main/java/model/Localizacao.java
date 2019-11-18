@@ -1,6 +1,6 @@
 package model;
 
-public class Localizacao extends  Abstract{
+public class Localizacao extends Saveable {
 
     public Localizacao(String nome, String descricao) {
         this.nome = nome;

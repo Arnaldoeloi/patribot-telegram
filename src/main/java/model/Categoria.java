@@ -1,6 +1,6 @@
 package model;
 
-public class Categoria extends Abstract{
+public class Categoria extends Saveable {
 
 
     public Categoria( String nome, String descricao) {

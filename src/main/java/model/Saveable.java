@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Abstract {
+public abstract class Saveable {
     protected Integer id ;
 
     protected String nome, descricao;
